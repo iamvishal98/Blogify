@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import IndexPage from "./pages/IndexPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CreatePost from "./pages/CreatePost";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route index element={<IndexPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
+            <Route path="/create" element={<CreatePost />} />
           </Route>
         </Routes>
       </BrowserRouter>
