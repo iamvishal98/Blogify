@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Post from "../Post";
+import axios from "axios";
 
 const IndexPage = () => {
+  const [posts, setPosts] = useState([]);
+  const getPosts = async () => {
+    const response = await axios.get("/api/post");
+    if (response.data) {
+      console.log(response.data);
+      setPosts(response.data);
+    } else {
+      console.log(`Error ${response}`);
+    }
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <Post {...post} key={post._id} />
+      ))}
     </>
   );
 };

@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 //import multer from "multer";
 //import fs from "fs";
 import userRoutes from "./routes/userRoutes.js";
@@ -12,19 +14,16 @@ import { errorHandler } from "./middlewares/errorMiddleware.js";
 dotenv.config();
 connectDb();
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+console.log(__dirname + "/uploads");
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+app.use("/backend/uploads", express.static(__dirname + "/uploads"));
 app.use("/api/users", userRoutes);
 app.use("/api/post", postRoutes);
-// app.post("/api/users/post", upload.single("file"), (req, res) => {
-//   const { originalname, path } = req.file;
-//   const parts = originalname.split(".");
-//   const ext = parts[parts.length - 1];
-//   fs.renameSync(path, path + "." + ext);
-//   res.json({ ext });
-// });
 app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
