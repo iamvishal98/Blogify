@@ -8,11 +8,11 @@ export const createPost = asynchandler(async (req, res) => {
   const ext = parts[parts.length - 1];
   const cover = path + "." + ext;
   fs.renameSync(path, cover);
-  const { title, summary, content } = req.body;
+  const { title, summary, editor } = req.body;
   const post = await Post.create({
     title,
     summary,
-    content,
+    content: editor,
     cover,
     author: req.user.id,
   });
@@ -26,4 +26,12 @@ export const getAllPost = asynchandler(async (req, res) => {
     .sort({ createdAt: "-1" })
     .limit(20);
   res.send(posts);
+});
+
+export const getPost = asynchandler(async (req, res) => {
+  const { id } = req.params;
+  const postDoc = await Post.findById(id).populate("author", "name");
+  if (postDoc) {
+    res.send(postDoc);
+  }
 });

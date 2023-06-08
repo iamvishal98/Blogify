@@ -1,6 +1,10 @@
 *{
   box-sizing: border-box;
 }
+.link {
+  text-decoration:none;
+  color: inherit;
+}
 a{
   cursor: pointer;
 }
@@ -43,7 +47,7 @@ div.post{
 }
 @media screen and (min-width: 700px) {
   div.post{
-      grid-template-columns: .9fr 1.1fr;
+      grid-template-columns: .6fr 1.4fr;
   }
 }
 
@@ -51,10 +55,7 @@ div.post div.texts h2{
   margin:0;
   font-size: 2rem;
 }
-div.post a{
-  text-decoration:none;
-  color: inherit;
-}
+
 div.post p.info{
   margin:24px 0;
   color: #888;

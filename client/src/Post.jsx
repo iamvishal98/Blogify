@@ -1,11 +1,11 @@
 import React from "react";
-import dateFormat, { masks } from "dateformat";
+import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 
 const Post = ({ title, summary, content, cover, createdAt, author, _id }) => {
   return (
-    <div className="post">
-      <Link to={`/post/${_id}`}>
+    <Link to={`/post/${_id}`} className="link">
+      <div className="post">
         <div className="image">
           <img src={"http://localhost:8000/" + cover} alt="pic" />
         </div>
@@ -17,8 +17,8 @@ const Post = ({ title, summary, content, cover, createdAt, author, _id }) => {
           </p>
           <p className="summary">{summary}</p>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
