@@ -3,30 +3,41 @@ import axios from "axios";
 import dateFormat from "dateformat";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { getPost } from "../redux/post/postSlice";
+import Spinner from "../components/Spinner";
 
 const PostPage = () => {
-  const [postInfo, setPostInfo] = useState({});
+  //const [postInfo, setPostInfo] = useState({});
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { post, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.posts
+  );
 
-  const getpost = async (req, res) => {
-    const response = await axios.get(`/api/post/${id}`);
-    if (response.data) {
-      console.log(response.data);
-      setPostInfo(response.data);
-    }
-  };
+  // const getpost = async (req, res) => {
+  //   const response = await axios.get(`/api/post/${id}`);
+  //   if (response.data) {
+  //     console.log(response.data);
+  //     setPostInfo(response.data);
+  //   }
+  // };
   useEffect(() => {
-    getpost();
+    //getpost();
+    dispatch(getPost(id));
   }, []);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="post-page">
-      <h1>{postInfo?.title}</h1>
-      <time>{dateFormat(postInfo?.createdAt, "mmmm dS, yyyy, h:MM TT")}</time>
-      <div className="author">by @{postInfo?.author?.name}</div>
-      {user?.id === postInfo?.author?._id && (
+      <h1>{post?.title}</h1>
+      <time>{dateFormat(post?.createdAt, "mmmm dS, yyyy, h:MM TT")}</time>
+      <div className="author">by @{post?.author?.name}</div>
+      {user?.id === post?.author?._id && (
         <div className="edit-row">
-          <Link className="edit-btn" to={`/post/edit/${postInfo._id}`}>
+          <Link className="edit-btn" to={`/post/edit/${post._id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,11 +57,15 @@ const PostPage = () => {
         </div>
       )}
       <div className="image">
-        <img src={`http://localhost:8000/${postInfo.cover}`} alt="" />
+        {post?.cover ? (
+          <img src={`http://localhost:8000/${post.cover}`} alt="" />
+        ) : (
+          ""
+        )}
       </div>
       <div
         className="content"
-        dangerouslySetInnerHTML={{ __html: postInfo.content }}
+        dangerouslySetInnerHTML={{ __html: post.content }}
       />
     </div>
   );

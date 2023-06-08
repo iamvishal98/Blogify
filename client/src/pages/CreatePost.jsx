@@ -16,14 +16,14 @@ const CreatePost = () => {
 
   const dispatch = useDispatch();
   const handleEditorChange = (value) => {
-    setValue("editor", value); // Update the form value for the editor
+    setValue("content", value); // Update the form value for the editor
   };
   const onSubmit = async (data) => {
     // Handle form submission
     const postData = new FormData();
     postData.set("title", data.title);
     postData.set("summary", data.summary);
-    postData.set("editor", data.editor);
+    postData.set("content", data.content);
     postData.set("file", data.file[0]);
 
     dispatch(createPost(postData));
@@ -51,7 +51,7 @@ const CreatePost = () => {
       />
       <input type="file" name="file" {...register("file")} />
       <ReactQuill
-        name="editor"
+        name="content"
         onChange={handleEditorChange}
         ref={{ register }}
       />

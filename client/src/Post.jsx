@@ -11,10 +11,10 @@ const Post = ({ title, summary, content, cover, createdAt, author, _id }) => {
         </div>
         <div className="texts">
           <h2>{title}</h2>
-          <p className="info">
-            <a className="author">{author.name}</a>
+          <div className="info">
+            <p className="author">{author.name}</p>
             <time>{dateFormat(createdAt, "mmmm dS, yyyy, h:MM TT")}</time>
-          </p>
+          </div>
           <p className="summary">{summary}</p>
         </div>
       </div>
