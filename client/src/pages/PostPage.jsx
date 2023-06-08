@@ -26,7 +26,7 @@ const PostPage = () => {
       <div className="author">by @{postInfo?.author?.name}</div>
       {user?.id === postInfo?.author?._id && (
         <div className="edit-row">
-          <Link className="edit-btn" to={`/edit/${postInfo._id}`}>
+          <Link className="edit-btn" to={`/post/edit/${postInfo._id}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

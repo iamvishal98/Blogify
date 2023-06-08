@@ -3,6 +3,8 @@ import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { createPost } from "../redux/post/postSlice";
 
 const CreatePost = () => {
   const {
@@ -12,6 +14,7 @@ const CreatePost = () => {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
   const handleEditorChange = (value) => {
     setValue("editor", value); // Update the form value for the editor
   };
@@ -23,18 +26,14 @@ const CreatePost = () => {
     postData.set("editor", data.editor);
     postData.set("file", data.file[0]);
 
-    // const pData = new FormData();
-    // for (const [name, value] of Object.entries(postData)) {
-    //   pData.append(name, value);
-    // }
+    dispatch(createPost(postData));
 
-    // console.log(pData.get("file"));
-    const response = await axios.post("/api/post/", postData);
-    if (response.data) {
-      console.log(response.data);
-    } else {
-      console.log(`Error: ${response}`);
-    }
+    // const response = await axios.post("/api/post/", postData);
+    // if (response.data) {
+    //   console.log(response.data);
+    // } else {
+    //   console.log(`Error: ${response}`);
+    // }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
