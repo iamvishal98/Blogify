@@ -3,11 +3,14 @@ import asynchandler from "express-async-handler";
 import Post from "../models/postModel.js";
 
 export const createPost = asynchandler(async (req, res) => {
-  const { originalname, path } = req.file;
-  const parts = originalname.split(".");
-  const ext = parts[parts.length - 1];
-  const cover = path + "." + ext;
-  fs.renameSync(path, cover);
+  let cover = null;
+  if (req.file) {
+    const { originalname, path } = req.file;
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
+    cover = path + "." + ext;
+    fs.renameSync(path, cover);
+  }
   const { title, summary, content } = req.body;
   const post = await Post.create({
     title,
@@ -16,7 +19,6 @@ export const createPost = asynchandler(async (req, res) => {
     cover,
     author: req.user.id,
   });
-
   res.json(post);
 });
 

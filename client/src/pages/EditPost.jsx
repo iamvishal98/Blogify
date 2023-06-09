@@ -1,66 +1,106 @@
-import React, { useEffect, useState } from "react";
-import Editor from "../components/Editor";
-import { Navigate, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost, getPost, reset } from "../redux/post/postSlice";
 import ReactQuill from "react-quill";
+import { Form, Input, Button, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { Quillmodules } from "../components/Editor";
+import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 const EditPost = () => {
-  const [content, setContent] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { post, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.posts
-  );
+  const navigate = useNavigate();
+  const { post, isLoading, isError, isCreatePostSuccess, message } =
+    useSelector((state) => state.posts);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
-
-  const handleEditorChange = (value) => {
-    setValue("content", value); // Update the form value for the editor
-  };
-
-  const onSubmit = (data) => {
+  const onFinish = (data) => {
+    //console.log(data);
     const postData = new FormData();
     postData.set("title", data.title);
     postData.set("summary", data.summary);
     postData.set("content", data.content);
     postData.set("id", id);
-    if (data.file?.[0]) {
-      postData.set("file", data.file?.[0]);
+    if (data.file?.fileList) {
+      postData.set("file", data.file.fileList[0].originFileObj);
     }
     dispatch(editPost(postData));
   };
   useEffect(() => {
     dispatch(getPost(id));
-  }, []);
+    if (isError) {
+      toast.error("Somwthing went wrong");
+    }
+    if (isCreatePostSuccess) {
+      navigate("/");
+      dispatch(reset());
+    }
+  }, [isError, isCreatePostSuccess, dispatch]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="title"
-        placeholder="Title"
-        name="title"
-        {...register("title")}
-      />
-      <input
-        type="summary"
-        placeholder="Summary"
-        name="summary"
-        {...register("summary")}
-      />
-      <input type="file" name="file" {...register("file")} />
-      <ReactQuill
-        name="content"
-        onChange={handleEditorChange}
-        ref={{ register }}
-      />
-      <button style={{ marginTop: "5px" }}>Update post</button>
-    </form>
+    <>
+      {post && (
+        <Form
+          onFinish={onFinish}
+          initialValues={{
+            title: post?.title,
+            summary: post?.summary,
+            content: post?.content,
+          }}
+          className="deploy-post"
+        >
+          <Form.Item
+            name="title"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Title!",
+              },
+            ]}
+          >
+            <Input placeholder="Title" />
+          </Form.Item>
+          <Form.Item
+            name="summary"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Summary!",
+              },
+            ]}
+          >
+            <Input placeholder="Summary" />
+          </Form.Item>
+          <Form.Item name="file">
+            <Upload beforeUpload={() => false} maxCount={1}>
+              <Button icon={<UploadOutlined />}>Select File</Button>
+            </Upload>
+          </Form.Item>
+          <Form.Item
+            name="content"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Content!",
+              },
+            ]}
+          >
+            <ReactQuill
+              modules={Quillmodules}
+              theme="snow"
+              style={{ minHeight: "30vh" }}
+            />
+          </Form.Item>
+          <Button htmlType="submit">Update your post</Button>
+        </Form>
+      )}
+    </>
   );
 };
 

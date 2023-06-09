@@ -1,62 +1,94 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
-import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { createPost } from "../redux/post/postSlice";
+import { createPost, reset } from "../redux/post/postSlice";
+import { Form, Input, Button, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { Quillmodules } from "../components/Editor.js";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 const CreatePost = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
-
   const dispatch = useDispatch();
-  const handleEditorChange = (value) => {
-    setValue("content", value); // Update the form value for the editor
-  };
-  const onSubmit = async (data) => {
-    // Handle form submission
+  const navigate = useNavigate();
+  const { isLoading, isError, isCreatePostSuccess } = useSelector(
+    (state) => state.posts
+  );
+
+  const onFinish = (data) => {
+    //console.log(data.file.fileList[0].originFileObj);
     const postData = new FormData();
     postData.set("title", data.title);
     postData.set("summary", data.summary);
     postData.set("content", data.content);
-    postData.set("file", data.file[0]);
-
+    if (data.file) {
+      postData.set("file", data.file.fileList[0].originFileObj);
+    }
     dispatch(createPost(postData));
-
-    // const response = await axios.post("/api/post/", postData);
-    // if (response.data) {
-    //   console.log(response.data);
-    // } else {
-    //   console.log(`Error: ${response}`);
-    // }
   };
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Something went wrong");
+    }
+    if (isCreatePostSuccess) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [isError, isCreatePostSuccess]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="title"
-        placeholder="Title"
+    <Form onFinish={onFinish} className="deploy-post">
+      <Form.Item
         name="title"
-        {...register("title")}
-      />
-      <input
-        type="summary"
-        placeholder="Summary"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Title!",
+          },
+        ]}
+      >
+        <Input placeholder="Title" />
+      </Form.Item>
+      <Form.Item
         name="summary"
-        {...register("summary")}
-      />
-      <input type="file" name="file" {...register("file")} />
-      <ReactQuill
+        rules={[
+          {
+            required: true,
+            message: "Please input your Summary!",
+          },
+        ]}
+      >
+        <Input placeholder="Summary" />
+      </Form.Item>
+      <Form.Item name="file">
+        <Upload beforeUpload={() => false} maxCount={1}>
+          <Button icon={<UploadOutlined />}>Select File</Button>
+        </Upload>
+      </Form.Item>
+      <Form.Item
         name="content"
-        onChange={handleEditorChange}
-        ref={{ register }}
-      />
-      <button style={{ marginTop: "5px" }}>Create post</button>
-    </form>
+        rules={[
+          {
+            required: true,
+            message: "Please input your Content!",
+          },
+        ]}
+      >
+        <ReactQuill
+          modules={Quillmodules}
+          theme="snow"
+          style={{ minHeight: "30vh" }}
+        />
+      </Form.Item>
+      <Button htmlType="submit">Create a Post</Button>
+    </Form>
   );
 };
 
