@@ -3,6 +3,7 @@ import multer from "multer";
 import { protect } from "../middlewares/authMiddleware.js";
 import {
   createPost,
+  deletePost,
   editpost,
   getAllPost,
   getPost,
@@ -11,9 +12,11 @@ import {
 const upload = multer({ dest: "backend/uploads/" });
 const router = express.Router();
 
-router.post("/", protect, upload.single("file"), createPost);
-router.put("/", protect, upload.single("file"), editpost);
-router.get("/", getAllPost);
-router.get("/:id", getPost);
+router
+  .route("/")
+  .post(protect, upload.single("file"), createPost)
+  .put(protect, upload.single("file"), editpost)
+  .get(getAllPost);
+router.route("/:id").get(getPost).delete(protect, deletePost);
 
 export default router;

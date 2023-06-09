@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Post from "../Post";
-import axios from "axios";
-import { getPosts, reset } from "../redux/post/postSlice";
+import Post from "../components/Post";
+import { getPosts } from "../redux/post/postSlice";
 
 const IndexPage = () => {
   const dispatch = useDispatch();
-  const { posts, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.posts
-  );
+  const { posts, isError, message } = useSelector((state) => state.posts);
 
   useEffect(() => {
     if (isError) {

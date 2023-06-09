@@ -66,3 +66,17 @@ export const getPost = asynchandler(async (req, res) => {
     res.send(postDoc);
   }
 });
+
+export const deletePost = asynchandler(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    res.status(400);
+    throw new Error("post not found");
+  }
+  if (!req.user) {
+    res.status(401);
+    throw new Error("User not found");
+  }
+  await Post.findOneAndDelete({ _id: req.params.id });
+  res.status(200).json({ id: req.params.id });
+});
