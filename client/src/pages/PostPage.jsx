@@ -1,21 +1,30 @@
 import React, { useEffect } from "react";
 import dateFormat from "dateformat";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getPost } from "../redux/post/postSlice";
+import { deletePost, getPost } from "../redux/post/postSlice";
 import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 const PostPage = () => {
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { post, isLoading, isError, isSuccess, message } = useSelector(
+  const navigate = useNavigate();
+  const { post, isLoading, isError, isDelete, message } = useSelector(
     (state) => state.posts
   );
 
   useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isDelete) {
+      navigate("/");
+    }
     dispatch(getPost(id));
-  }, []);
+  }, [isDelete]);
 
   if (isLoading) {
     return <Spinner />;
@@ -48,7 +57,10 @@ const PostPage = () => {
             </Link>
           </div>
           <div className="delete-row">
-            <Link className="delete-btn" to="/">
+            <button
+              className="delete-btn"
+              onClick={() => dispatch(deletePost(id))}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -64,7 +76,7 @@ const PostPage = () => {
                 />
               </svg>
               Delete this post
-            </Link>
+            </button>
           </div>
         </div>
       )}

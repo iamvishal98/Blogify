@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { reset, registerUser } from "../redux/auth/authSlice";
+import Spinner from "../components/Spinner";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -33,6 +34,10 @@ const Signup = () => {
       dispatch(registerUser(values));
     }
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <Form
       className="login-form"

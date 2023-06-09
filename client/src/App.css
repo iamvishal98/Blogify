@@ -163,7 +163,7 @@ div.edit-row,div.delete-row{
   text-align: center;
   margin-bottom: 20px;
 }
-div.post-page a.edit-btn,a.delete-btn{
+div.post-page a.edit-btn, .delete-btn{
   background-color: #333;
   display: inline-flex;
   align-items: center;
@@ -173,13 +173,13 @@ div.post-page a.edit-btn,a.delete-btn{
   border-radius: 5px;
   text-decoration: none;
 }
-div.post-page a.delete-btn {
+div.post-page .delete-btn {
   background-color: red;
   text-decoration: none;
   color: #f2f2f2;
 
 }
-a svg{
+svg{
   height:20px;
 }
 

@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { createPost, reset } from "../redux/post/postSlice";
 import { Form, Input, Button, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Quillmodules } from "../components/Editor.js";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
@@ -18,7 +17,6 @@ const CreatePost = () => {
   );
 
   const onFinish = (data) => {
-    //console.log(data.file.fileList[0].originFileObj);
     const postData = new FormData();
     postData.set("title", data.title);
     postData.set("summary", data.summary);
@@ -81,11 +79,7 @@ const CreatePost = () => {
           },
         ]}
       >
-        <ReactQuill
-          modules={Quillmodules}
-          theme="snow"
-          style={{ minHeight: "30vh" }}
-        />
+        <ReactQuill theme="snow" style={{ minHeight: "30vh" }} />
       </Form.Item>
       <Button htmlType="submit">Create a Post</Button>
     </Form>

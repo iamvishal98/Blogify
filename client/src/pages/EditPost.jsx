@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost, getPost, reset } from "../redux/post/postSlice";
 import ReactQuill from "react-quill";
 import { Form, Input, Button, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Quillmodules } from "../components/Editor";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 
@@ -13,11 +12,11 @@ const EditPost = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { post, isLoading, isError, isCreatePostSuccess, message } =
-    useSelector((state) => state.posts);
+  const { post, isLoading, isError, isCreatePostSuccess } = useSelector(
+    (state) => state.posts
+  );
 
   const onFinish = (data) => {
-    //console.log(data);
     const postData = new FormData();
     postData.set("title", data.title);
     postData.set("summary", data.summary);
@@ -91,11 +90,7 @@ const EditPost = () => {
               },
             ]}
           >
-            <ReactQuill
-              modules={Quillmodules}
-              theme="snow"
-              style={{ minHeight: "30vh" }}
-            />
+            <ReactQuill theme="snow" style={{ minHeight: "30vh" }} />
           </Form.Item>
           <Button htmlType="submit">Update your post</Button>
         </Form>

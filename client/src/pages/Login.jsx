@@ -5,6 +5,7 @@ import { login, reset } from "../redux/auth/authSlice";
 import { toast } from "react-toastify";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import Spinner from "../components/Spinner";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,6 +29,10 @@ const Login = () => {
   const onFinish = (values) => {
     dispatch(login(values));
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <Form
       className="login-form"
