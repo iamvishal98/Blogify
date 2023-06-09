@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Post from "../components/Post";
-import { getPosts } from "../redux/post/postSlice";
+import { getPosts, reset } from "../redux/post/postSlice";
+import { toast } from "react-toastify";
 
 const IndexPage = () => {
   const dispatch = useDispatch();
@@ -9,9 +10,13 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (isError) {
-      alert(`${message}`);
+      toast.error(message);
     }
     dispatch(getPosts());
+
+    return () => {
+      dispatch(reset());
+    };
   }, [isError]);
   return (
     <div style={{ padding: "2rem" }}>

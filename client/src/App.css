@@ -97,7 +97,7 @@ input{
   border-radius: 5px;
   background-color: #fff;
 }
-button{
+.button-class{
   cursor: pointer;
   width: 100%;
   display: block;

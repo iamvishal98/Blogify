@@ -36,6 +36,9 @@ const EditPost = () => {
       navigate("/");
       dispatch(reset());
     }
+    return () => {
+      dispatch(reset());
+    };
   }, [isError, isCreatePostSuccess, dispatch]);
 
   if (isLoading) {

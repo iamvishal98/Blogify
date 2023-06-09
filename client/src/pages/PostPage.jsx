@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import dateFormat from "dateformat";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deletePost, getPost } from "../redux/post/postSlice";
+import { deletePost, getPost, reset } from "../redux/post/postSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
 
@@ -24,6 +24,9 @@ const PostPage = () => {
       navigate("/");
     }
     dispatch(getPost(id));
+    return () => {
+      dispatch(reset());
+    };
   }, [isDelete]);
 
   if (isLoading) {
@@ -38,7 +41,10 @@ const PostPage = () => {
       {user?.id === post?.author?._id && (
         <div className="actions-buttons">
           <div className="edit-row">
-            <Link className="edit-btn" to={`/post/edit/${post._id}`}>
+            <Link
+              className="edit-btn button-class"
+              to={`/post/edit/${post._id}`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -58,7 +64,8 @@ const PostPage = () => {
           </div>
           <div className="delete-row">
             <button
-              className="delete-btn"
+              className="delete-btn button-class"
+              i
               onClick={() => dispatch(deletePost(id))}
             >
               <svg
