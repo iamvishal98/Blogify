@@ -13,21 +13,19 @@ import EditPost from "./pages/EditPost";
 
 const App = () => {
   return (
-    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<IndexPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/create" element={<CreatePost />} />
+          <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/post/edit/:id" element={<EditPost />} />
+        </Route>
+      </Routes>
       <ToastContainer />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<IndexPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
-            <Route path="/create" element={<CreatePost />} />
-            <Route path="/post/:id" element={<PostPage />} />
-            <Route path="/post/edit/:id" element={<EditPost />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </>
+    </BrowserRouter>
   );
 };
 

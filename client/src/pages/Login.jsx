@@ -1,17 +1,12 @@
-import React, { useContext, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login, reset } from "../redux/auth/authSlice";
 import { toast } from "react-toastify";
+import { Form, Input, Button } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user, isLoading, isError, isSuccess, message } = useSelector(
@@ -20,7 +15,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message); //toast
+      toast.error(message);
     }
 
     if (isSuccess || user) {
@@ -30,26 +25,54 @@ const Login = () => {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const onSubmit = (data) => {
-    dispatch(login(data));
+  const onFinish = (values) => {
+    dispatch(login(values));
   };
   return (
-    <form className="login" onSubmit={handleSubmit(onSubmit)}>
-      <h1>Login</h1>
-      <input
-        type="email"
-        placeholder="email"
+    <Form
+      className="login-form"
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+    >
+      <Form.Item
         name="email"
-        {...register("email")}
-      />
-      <input
-        type="password"
-        placeholder="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your Username!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Username"
+        />
+      </Form.Item>
+      <Form.Item
         name="password"
-        {...register("password")}
-      />
-      <button>LOGIN</button>
-    </form>
+        rules={[
+          {
+            required: true,
+            message: "Please input your Password!",
+          },
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Log in
+        </Button>
+        Or <Link to="/register">register now!</Link>
+      </Form.Item>
+    </Form>
   );
 };
 

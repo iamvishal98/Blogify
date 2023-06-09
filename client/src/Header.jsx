@@ -1,24 +1,36 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "./redux/auth/authSlice";
+import { Button } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <header>
-      <Link to="/">My blog</Link>
+      <Link className="logo " to="/">
+        BlogIfy
+      </Link>
       <nav>
         {user ? (
           <>
-            <Link to="/create">CREATE A POST</Link>
-            <a onClick={() => dispatch(logout())}>LOGOUT</a>
+            <Button type="primary" onClick={() => navigate("/create")}>
+              {" "}
+              <EditOutlined /> POST
+            </Button>
+            <Button onClick={() => dispatch(logout())}>LOGOUT</Button>
           </>
         ) : (
           <>
-            <Link to="/login">LOGIN</Link>
-            <Link to="/register">REGISTER</Link>
+            <Button size={"large"} onClick={() => navigate("/login")}>
+              Login
+            </Button>
+            <Button size={"large"} onClick={() => navigate("/register")}>
+              Register
+            </Button>
           </>
         )}
       </nav>

@@ -8,6 +8,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
+  isCreatePostSuccess: false,
 };
 
 export const createPost = createAsyncThunk(
@@ -84,7 +85,13 @@ export const postSlice = createSlice({
   name: "post",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+      state.isCreatePostSuccess = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -94,11 +101,13 @@ export const postSlice = createSlice({
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isCreatePostSuccess = true;
         state.posts.push(action.payload);
       })
       .addCase(createPost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isCreatePostSuccess = false;
         state.message = action.payload;
       })
       .addCase(getPosts.pending, (state) => {
@@ -133,11 +142,13 @@ export const postSlice = createSlice({
       .addCase(editPost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isCreatePostSuccess = true;
         state.post = action.payload;
       })
       .addCase(editPost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.isCreatePostSuccess = false;
         state.message = action.payload;
       });
   },

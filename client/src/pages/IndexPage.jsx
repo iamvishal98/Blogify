@@ -15,17 +15,13 @@ const IndexPage = () => {
       alert(`${message}`);
     }
     dispatch(getPosts());
-
-    // return () => {
-    //   dispatch(reset());
-    // };
-  }, []);
+  }, [isError]);
   return (
-    <>
+    <div style={{ padding: "2rem" }}>
       {posts.map((post) => (
         <Post {...post} key={post._id} />
       ))}
-    </>
+    </div>
   );
 };
 
