@@ -30,6 +30,8 @@ header{
   box-shadow: 0px  3px 3px #888888;
   padding: 1rem;
 }
+
+
 header a{
   text-decoration:none;
   color: inherit;
@@ -75,6 +77,7 @@ div.post div.texts h2{
   display: flex;
   gap: 10px;
 }
+
 .author{
   color:#333;
   text-transform: capitalize;
@@ -121,7 +124,7 @@ div.post-page div.image{
 }
 div.post-page div.image img{
   object-fit: cover;
-  object-position: center center;
+  object-position:  center;
   width: 100%;
 }
 div.post-page a{
@@ -223,4 +226,21 @@ div.quill div.ql-editor {
   }
 }
 
-
+@media screen and (max-width:900px) {
+  div.post div.texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.post div.texts h2{
+    font-size: 1.5rem; 
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+  div.post div.image{
+    aspect-ratio: 1;
+  }
+}
