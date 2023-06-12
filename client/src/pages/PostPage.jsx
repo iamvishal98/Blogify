@@ -89,7 +89,7 @@ const PostPage = () => {
       )}
       <div className="image">
         {post?.cover ? (
-          <img src={`http://localhost:8000/${post.cover}`} alt="" />
+          <img src={`https://blogify-svyo.onrender.com/${post.cover}`} alt="" />
         ) : (
           <img
             src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
