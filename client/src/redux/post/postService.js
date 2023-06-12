@@ -3,7 +3,9 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_BASE_URL + "/api/post/";
 
 const createPost = async (postData) => {
-  const response = await axios.post(API_URL, postData);
+  const response = await axios.post(API_URL, postData, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
@@ -19,12 +21,16 @@ const getPost = async (postId) => {
 };
 
 const editPost = async (postData) => {
-  const response = await axios.put(API_URL, postData);
+  const response = await axios.put(API_URL, postData, {
+    withCredentials: true,
+  });
   return response.data;
 };
 
 export const deletePost = async (postId) => {
-  const response = await axios.delete(API_URL + postId);
+  const response = await axios.delete(API_URL + postId, {
+    withCredentials: true,
+  });
   return response.data;
 };
 const postService = {
