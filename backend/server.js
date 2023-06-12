@@ -3,14 +3,11 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
-//import multer from "multer";
-//import fs from "fs";
 import userRoutes from "./routes/userRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import connectDb from "./config/db.js";
 import { errorHandler } from "./middlewares/errorMiddleware.js";
 
-//const upload = multer({ dest: "uploads/" });
 dotenv.config();
 connectDb();
 const app = express();
