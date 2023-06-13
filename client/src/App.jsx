@@ -12,6 +12,7 @@ import PostPage from "./pages/PostPage";
 import EditPost from "./pages/EditPost";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NoSupport from "./components/NoSupport";
 
 const App = () => {
   const { user } = useSelector((state) => state.auth);
@@ -42,6 +43,7 @@ const App = () => {
         </Route>
       </Routes>
       <ToastContainer />
+      <NoSupport />
     </BrowserRouter>
   );
 };

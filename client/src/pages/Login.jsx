@@ -35,7 +35,7 @@ const Login = () => {
   }
   return (
     <Form
-      className="login-form"
+      className="auth-form"
       initialValues={{
         remember: true,
       }}

@@ -40,7 +40,7 @@ const Signup = () => {
   }
   return (
     <Form
-      className="login-form"
+      className="auth-form"
       initialValues={{
         remember: true,
       }}
@@ -108,7 +108,7 @@ const Signup = () => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Log in
+          Register
         </Button>
         Or <Link to="/login">Login</Link>
       </Form.Item>
