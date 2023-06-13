@@ -22,8 +22,10 @@ app.use(
     origin: true,
     preflightContinue: true,
     credentials: true,
+    exposedHeaders: ["set-cookie"],
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
