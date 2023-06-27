@@ -1,6 +1,6 @@
 // making http request
 import axios from "axios";
-const API_URL = "https://blogify-o1o1.onrender.com" + "/api/users/";
+const API_URL = import.meta.env.VITE_BASE_URL + "/api/users/";
 
 // register user
 const register = async (userData) => {

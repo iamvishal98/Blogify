@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://blogify-o1o1.onrender.com" + "/api/post/";
+const API_URL = import.meta.env.VITE_BASE_URL + "/api/post/";
 
 const createPost = async (postData) => {
   const response = await axios.post(API_URL, postData, {

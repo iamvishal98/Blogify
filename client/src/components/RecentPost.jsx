@@ -11,7 +11,7 @@ const RecentPost = ({ recentPost }) => {
         <div className="recent-post-image">
           {recentPost?.cover ? (
             <img
-              src={"https://blogify-o1o1.onrender.com/" + recentPost?.cover}
+              src={`${import.meta.env.VITE_BASE_URL}/` + recentPost?.cover}
               alt="pic"
             />
           ) : (

@@ -1,5 +1,4 @@
 import React from "react";
-import dateFormat from "dateformat";
 import { Link } from "react-router-dom";
 import { Card, Col, Typography } from "antd";
 
@@ -19,7 +18,7 @@ const Post = ({ title, cover, author, _id }) => {
           <div className="post-card-image">
             {cover ? (
               <img
-                src={"https://blogify-o1o1.onrender.com/" + cover}
+                src={`${import.meta.env.VITE_BASE_URL}/` + cover}
                 alt="pic"
               />
             ) : (

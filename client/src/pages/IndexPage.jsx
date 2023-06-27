@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Post from "../components/Post";
 import { getPosts, reset } from "../redux/post/postSlice";
 import { toast } from "react-toastify";
-import { Card, Row } from "antd";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import { Row } from "antd";
 import RecentPost from "../components/RecentPost";
 const IndexPage = () => {
   const dispatch = useDispatch();

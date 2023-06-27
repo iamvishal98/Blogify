@@ -94,7 +94,7 @@ const PostPage = () => {
       )}
       <div className="image">
         {post?.cover ? (
-          <img src={"https://blogify-o1o1.onrender.com/" + post.cover} alt="" />
+          <img src={`${import.meta.env.VITE_BASE_URL}/` + post.cover} alt="" />
         ) : (
           <>
             <Divider />
