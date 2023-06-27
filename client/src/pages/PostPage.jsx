@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deletePost, getPost, reset } from "../redux/post/postSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
-import { Divider, Space } from "antd";
+import { Divider } from "antd";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -96,10 +96,10 @@ const PostPage = () => {
         {post?.cover ? (
           <img src={"https://blogify-o1o1.onrender.com/" + post.cover} alt="" />
         ) : (
-          <img
-            src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80"
-            alt="pic"
-          />
+          <>
+            <Divider />
+            <Divider />
+          </>
         )}
       </div>
       <div

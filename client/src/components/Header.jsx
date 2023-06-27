@@ -16,10 +16,14 @@ const Header = () => {
       <nav>
         {user ? (
           <>
-            <Button type="primary" onClick={() => navigate("/create")}>
-              {" "}
-              CREATE POST
-            </Button>
+            {location.pathname != "/create" ? (
+              <Button type="primary" onClick={() => navigate("/create")}>
+                {" "}
+                CREATE POST
+              </Button>
+            ) : (
+              ""
+            )}
             <Button onClick={() => dispatch(logout())}>LOGOUT</Button>
           </>
         ) : (

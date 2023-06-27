@@ -177,7 +177,7 @@ div.content {
 div.post-page div.image{
   height:auto;
   display: flex;
-  overflow:hidden;
+ 
 }
 div.post-page div.image img{
   object-fit: cover;
@@ -298,6 +298,79 @@ div.quill div.ql-editor {
   min-height: 35vh;
 }
 
+
+/* INDEX-PAGE */
+.recent-post {
+  display: flex;
+  height: 500px;
+  margin-bottom: 40px;
+  transition: all 0.5s ease;
+  gap: 20px;
+}
+
+.recent-post-image {
+  flex: 2;
+}
+
+.recent-post-card {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+.recent-post-card >.ant-card {
+  min-width: 300px;
+}
+
+.recent-post-heading {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.recent-post-summary {
+  color: #5f6368;
+  margin-bottom: 20px;
+}
+.recent-post-icon {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.recent-post:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+.recent-post:hover .recent-post-heading,.recent-post-icon {
+  text-decoration: underline;
+
+}
+.recent-post:hover .recent-post-icon {
+  color: #0c53c5;
+}
+
+
+.post-card{
+  min-width: 300px;
+  height: 300px;
+  padding: 10px;
+  
+}
+.post-card-author-name {
+  color: #5f6368;
+  font-size: 13px;
+  text-transform: capitalize;
+  margin-bottom: 5px;
+}
+.post-card-author-name> span {
+  color: #0c53c5;
+}
+
+.post-card-title {
+  font-size: large;
+  margin-bottom: 10px;
+}
+.post-card-image {
+  height: 150px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -334,6 +407,22 @@ div.quill div.ql-editor {
   div.post div.image{
     aspect-ratio: 1;
   }
+  .recent-post {
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 700px;
+  } 
+ 
+  .recent-post-card {
+    width: 100%;
+  }
+
+  .recent-post-card >.ant-card {
+    width: 100%;
+  }
+ 
+ 
 }
 
 @media screen and (max-width:768px) {
