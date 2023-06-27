@@ -185,16 +185,6 @@ div.post-page div.image img{
   width: 100%;
 }
 
-
-/* div.post-page time{
-  text-align: center;
-  display: block;
-  font-size:1rem;
-  color:#aaa;
-  margin: 10px 0;
-} */
-
-
 div.content li{
   margin-bottom: 10px;
 }
@@ -257,9 +247,7 @@ div.quill div.ql-editor {
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
-.auth-form {
-  padding: 8rem;
-}
+
 
 .no-support-container {
 display: none;
@@ -269,6 +257,35 @@ display: none;
 display: none;
 }
 
+
+/* AUTH_FROMS */
+.auth-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 5rem);
+  margin-top: -40px;
+}
+
+.auth-page-container .left-side {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  
+}
+.auth-page-container .right-side {
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+.form-link >p >a{
+  text-decoration: none;
+  color: #174ea6;
+}
 
 @keyframes spin {
   0% {
@@ -284,9 +301,6 @@ display: none;
   div.post-page {
     padding: 0px 100px 30px 100px ;
   }
-  /* div.post-page div.image{
-   margin: 0px -100px
-  } */
   
 }
 @media screen and (max-width:900px) {
@@ -312,6 +326,15 @@ display: none;
   /* div.post-page {
     padding: 0px 100px 30px 100px ;
   } */
+
+  .auth-page-container .left-side {
+    display: none
+  }
+  
+  .auth-page-container .right-side {
+    padding:40px 80px;
+  }
+
   div.post-page div.image{
    margin: 0px -100px
   }
