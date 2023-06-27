@@ -27,7 +27,7 @@ const IndexPage = () => {
       <RecentPost recentPost={recentPost} />
 
       <Row gutter={[16, 16]}>
-        {remainingPosts.map((post) => (
+        {remainingPosts?.map((post) => (
           <Post {...post} key={post._id} />
         ))}
       </Row>
