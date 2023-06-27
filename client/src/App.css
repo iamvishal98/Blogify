@@ -219,12 +219,7 @@ svg{
   height:20px;
 }
 
-.deploy-post {
-  padding: 4rem 10rem 0rem 10rem ;
-}
-div.quill div.ql-editor {
-  min-height: 35vh;
-}
+
 
 .loadingSpinnerContainer {
   position: fixed;
@@ -287,6 +282,22 @@ display: none;
   color: #174ea6;
 }
 
+/* CREATE-EDIT-POST */
+.deploy-post-container {
+  display: flex;
+  flex-direction: column;
+  
+}
+.deploy-title {
+  text-align: center;
+}
+.deploy-post {
+  padding: 20px 300px;
+}
+div.quill div.ql-editor {
+  min-height: 35vh;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -300,6 +311,9 @@ display: none;
 @media screen and (max-width:1024px) {
   div.post-page {
     padding: 0px 100px 30px 100px ;
+  }
+  .deploy-post {
+    padding: 20px 200px;
   }
   
 }
@@ -342,6 +356,9 @@ display: none;
    
     padding: 0px 20px;
 
+  }
+  .deploy-post {
+    padding: 20px 100px;
   }
   
 }

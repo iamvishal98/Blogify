@@ -46,9 +46,13 @@ const EditPost = () => {
   }
 
   return (
-    <>
+    <div className="deploy-post-container">
+      <div className="deploy-title">
+        <h3>Update your Post </h3>
+      </div>
       {post && (
         <Form
+          layout="vertical"
           onFinish={onFinish}
           initialValues={{
             title: post?.title,
@@ -58,6 +62,7 @@ const EditPost = () => {
           className="deploy-post"
         >
           <Form.Item
+            label="Title"
             name="title"
             rules={[
               {
@@ -69,6 +74,7 @@ const EditPost = () => {
             <Input placeholder="Title" />
           </Form.Item>
           <Form.Item
+            label="Summary"
             name="summary"
             rules={[
               {
@@ -79,12 +85,13 @@ const EditPost = () => {
           >
             <Input placeholder="Summary" />
           </Form.Item>
-          <Form.Item name="file">
+          <Form.Item name="file" label="File">
             <Upload beforeUpload={() => false} maxCount={1}>
               <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
           </Form.Item>
           <Form.Item
+            label="Content"
             name="content"
             rules={[
               {
@@ -95,10 +102,10 @@ const EditPost = () => {
           >
             <ReactQuill theme="snow" style={{ minHeight: "30vh" }} />
           </Form.Item>
-          <Button htmlType="submit">Update your post</Button>
+          <Button htmlType="submit">Update</Button>
         </Form>
       )}
-    </>
+    </div>
   );
 };
 

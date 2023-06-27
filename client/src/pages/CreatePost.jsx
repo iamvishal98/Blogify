@@ -42,47 +42,55 @@ const CreatePost = () => {
     return <Spinner />;
   }
   return (
-    <Form onFinish={onFinish} className="deploy-post">
-      <Form.Item
-        name="title"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Title!",
-          },
-        ]}
-      >
-        <Input placeholder="Title" />
-      </Form.Item>
-      <Form.Item
-        name="summary"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Summary!",
-          },
-        ]}
-      >
-        <Input placeholder="Summary" />
-      </Form.Item>
-      <Form.Item name="file">
-        <Upload beforeUpload={() => false} maxCount={1}>
-          <Button icon={<UploadOutlined />}>Select File</Button>
-        </Upload>
-      </Form.Item>
-      <Form.Item
-        name="content"
-        rules={[
-          {
-            required: true,
-            message: "Please input your Content!",
-          },
-        ]}
-      >
-        <ReactQuill theme="snow" style={{ minHeight: "30vh" }} />
-      </Form.Item>
-      <Button htmlType="submit">Create a Post</Button>
-    </Form>
+    <div className="deploy-post-container">
+      <div className="deploy-title">
+        <h3>Create your Post </h3>
+      </div>
+      <Form onFinish={onFinish} className="deploy-post" layout="vertical">
+        <Form.Item
+          label="Title"
+          name="title"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Title!",
+            },
+          ]}
+        >
+          <Input placeholder="Title" />
+        </Form.Item>
+        <Form.Item
+          label="Summary"
+          name="summary"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Summary!",
+            },
+          ]}
+        >
+          <Input placeholder="Summary" />
+        </Form.Item>
+        <Form.Item name="file" label="File">
+          <Upload beforeUpload={() => false} maxCount={1}>
+            <Button icon={<UploadOutlined />}>Select File</Button>
+          </Upload>
+        </Form.Item>
+        <Form.Item
+          label="Content"
+          name="content"
+          rules={[
+            {
+              required: true,
+              message: "Please input your Content!",
+            },
+          ]}
+        >
+          <ReactQuill theme="snow" style={{ minHeight: "30vh" }} />
+        </Form.Item>
+        <Button htmlType="submit">Create a Post</Button>
+      </Form>
+    </div>
   );
 };
 
