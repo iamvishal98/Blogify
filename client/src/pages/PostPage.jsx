@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deletePost, getPost, reset } from "../redux/post/postSlice";
 import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
+import { Divider, Space } from "antd";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -35,9 +36,13 @@ const PostPage = () => {
   return (
     <div className="post-page">
       <h1 className="post-title">{post?.title}</h1>
+
       <h3 className="post-summary">{post?.summary}</h3>
-      <time>{dateFormat(post?.createdAt, "mmmm dS, yyyy, h:MM TT")}</time>
-      <div className="author">By {post?.author?.name}</div>
+      <time className="post-time">
+        {dateFormat(post?.createdAt, "mmmm dS, yyyy, h:MM TT")}
+      </time>
+
+      <div className="author">{post?.author?.name}</div>
       {user?.id === post?.author?._id && (
         <div className="actions-buttons">
           <div className="edit-row">

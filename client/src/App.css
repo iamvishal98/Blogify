@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap');
+
 *{
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: Poppins,sans-serif;
 }
 .link {
   text-decoration:none;
@@ -114,9 +117,63 @@ form.login h1, form.register h1{
   text-align: center;
 }
 
-div.post-page {
-  padding: 50px;
+
+/* POST_PAGE */
+
+.post-page a{
+  text-decoration: none;
 }
+
+.post-page a:hover{
+  opacity: 0.8;
+}
+
+div.post-page {
+  padding: 50px 250px 30px 250px ;
+}
+
+.post-page .post-title {
+  font-size: 60px;
+  display: flex;
+  align-items: flex-start;
+}
+.post-page .post-summary{
+  text-align: start;
+  margin: 10px 0 5px;
+  color: #5f6368;
+}
+
+.post-page .post-time {
+  color: #aaa;
+}
+
+div.post-page div.author{
+  text-align: start;
+  margin:  20px 0px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #174ea6;
+  /* #202124; */
+}
+
+div.content {
+  line-height: 30px;
+  margin: 20px 0;
+  padding: 0 30px;
+  color: #202124;
+  font-weight: 300;
+}
+
+.content > p {
+  margin: 20px 0;
+}
+
+.content :is(h1, h2, h3, h4, h5, h6)
+{
+    font-weight: 400;
+}
+
+
 div.post-page div.image{
   height:auto;
   display: flex;
@@ -127,31 +184,17 @@ div.post-page div.image img{
   object-position:  center;
   width: 100%;
 }
-div.post-page a{
-  color:#333;
-  text-decoration: underline;
-}
-.post-title,.post-summary{
-  text-align: center;
-  margin: 10px 0 5px;
-}
-div.post-page time{
+
+
+/* div.post-page time{
   text-align: center;
   display: block;
   font-size:1rem;
   color:#aaa;
   margin: 10px 0;
-}
-div.post-page div.author{
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: .7rem;
-  font-weight: bold;
-}
-div.content {
-  line-height: 1.7rem;
-  margin: 30px 0;
-}
+} */
+
+
 div.content li{
   margin-bottom: 10px;
 }
@@ -236,6 +279,16 @@ display: none;
   }
 }
 
+
+@media screen and (max-width:1024px) {
+  div.post-page {
+    padding: 0px 100px 30px 100px ;
+  }
+  /* div.post-page div.image{
+   margin: 0px -100px
+  } */
+  
+}
 @media screen and (max-width:900px) {
   div.post div.texts {
     display: flex;
@@ -253,6 +306,21 @@ display: none;
   div.post div.image{
     aspect-ratio: 1;
   }
+}
+
+@media screen and (max-width:768px) {
+  /* div.post-page {
+    padding: 0px 100px 30px 100px ;
+  } */
+  div.post-page div.image{
+   margin: 0px -100px
+  }
+  div.content {
+   
+    padding: 0px 20px;
+
+  }
+  
 }
 
 
